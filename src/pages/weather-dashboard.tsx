@@ -1,7 +1,9 @@
 import WeatherSkeleton from "@/components/loading-skeleton";
 import { Button } from "@/components/ui/button";
+import { Alert, AlertTitle, AlertDescription } from "@/components/ui/alert";
 import { useGeolocation } from "@/hooks/use-geolocation";
-import { RefreshCw } from "lucide-react";
+import { AlertTriangle, MapPin, RefreshCw } from "lucide-react";
+import { useReverseGeocodeQuery } from "@/hooks/use-weather";
 
 const WeatherDashboard = () => {
   const {
@@ -10,7 +12,9 @@ const WeatherDashboard = () => {
     getLocation,
     isLoading: locationLoading,
   } = useGeolocation();
-  console.log(coordinates);
+
+  const locationQuery = useReverseGeocodeQuery(coordinates);
+  console.log(locationQuery);
 
   const handleRefresh = () => {
     getLocation();
@@ -23,6 +27,37 @@ const WeatherDashboard = () => {
     return <WeatherSkeleton />;
   }
 
+  if (locationError) {
+    return (
+      <Alert variant="destructive">
+        <AlertTriangle className="h-4 w-4" />
+        <AlertTitle>Location Error</AlertTitle>
+        <AlertDescription className="flex flex-col gap-4">
+          <p>{locationError}</p>
+          <Button onClick={getLocation} variant={"outline"} className="w-fit">
+            <MapPin className="mr-2 h-4 w-4" />
+            Enable Location
+          </Button>
+        </AlertDescription>
+      </Alert>
+    );
+  }
+
+  if (!coordinates) {
+    return (
+      <Alert variant="destructive">
+        <AlertTitle>Location Required</AlertTitle>
+        <AlertDescription className="flex flex-col gap-4">
+          <p>Please enable location access to see your local weather.</p>
+          <Button onClick={getLocation} variant={"outline"} className="w-fit">
+            <MapPin className="mr-2 h-4 w-4" />
+            Enable Location
+          </Button>
+        </AlertDescription>
+      </Alert>
+    );
+  }
+
   return (
     <div className="space-y-4">
       {/* Favorite Cities */}
@@ -31,7 +66,7 @@ const WeatherDashboard = () => {
         <Button
           variant={"outline"}
           size={"icon"}
-          // onClick={handleRefresh}
+          onClick={handleRefresh}
           // disabled={}
         >
           <RefreshCw className="h-4 w-4" />
