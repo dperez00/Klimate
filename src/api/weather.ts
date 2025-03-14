@@ -9,7 +9,7 @@ class WeatherAPI{
                 appid: API_CONFIG.API_KEY,
                 ...params,
             });
-            return `${endpoint}? ${searchParams.toString()}`;
+            return `${endpoint}?${searchParams.toString()}`;
     }
     private async fetchData<T>(url: string): Promise<T> {
         const response = await fetch(url);
