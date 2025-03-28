@@ -25,7 +25,7 @@ export function useSearchHistory() {
         });
 
         const addToHistory = useMutation({
-            mutationFn: async (search: Omit<SearchHistoryItem, "id" | "SearchedAt">) => {
+            mutationFn: async (search: Omit<SearchHistoryItem, "id" | "searchedAt">) => {
                 const newSearch: SearchHistoryItem = {
                     ...search,
                     id: `${search.lat}-${search.lon}-${Date.now()}`,
