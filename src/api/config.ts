@@ -3,7 +3,7 @@ export const API_CONFIG = {
     GEO: "https://api.openweathermap.org/geo/1.0",
     API_KEY: import.meta.env.VITE_OPENWEATHER_API_KEY,
     DEFAULT_PARAMS: {
-        units: "metric",
+        units: "imperial",
         appid: import.meta.env.VITE_OPENWEATHER_API_KEY,
     },
 };
