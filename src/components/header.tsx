@@ -12,7 +12,7 @@ const Header = () => {
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         <Link to={"/"}>
           <img
-            src={theme === "dark" ? "logo.png" : "logo2.png"}
+            src={theme === "dark" ? "/logo.png" : "/logo2.png"}
             alt="Klimate Logo"
             className="h-14"
           />
