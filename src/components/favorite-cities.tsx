@@ -53,7 +53,7 @@ function FavoriteCityTablet({
 
   return (
     <div
-      onClick={() => navigate(`/city/${name}?lat=${lon}`)}
+      onClick={() => navigate(`/city/${name}?lat=${lat}&lon=${lon}`)}
       role="button"
       tabIndex={0}
       className="relative flex min-w-[250px] cursor-pointer items-center gap-3 rounded-lg border bg-card p-4 pr-8 shadow-sm transition-all hover:shadow-md"
@@ -83,10 +83,12 @@ function FavoriteCityTablet({
               alt={weather.weather[0].description}
               className="h-8 w-8"
             />
-            <p className="font-medium">{name}</p>
-            <p className="text-xs text-muted-foreground">
-              {weather.sys.country}
-            </p>
+            <div>
+              <p className="font-medium">{name}</p>
+              <p className="text-xs text-muted-foreground">
+                {weather.sys.country}
+              </p>
+            </div>
           </div>
           <div className="ml-auto text-right">
             <p className="text-xl font-bold">
