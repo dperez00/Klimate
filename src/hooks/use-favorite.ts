@@ -11,7 +11,7 @@ interface FavoriteCity {
     addedAt: number;
 }
 
-export function UseFavorite() {
+export function useFavorite() {
     const [favorites, setFavorites] = useLocalStorage<FavoriteCity[]>(
         "favorites", []);
 

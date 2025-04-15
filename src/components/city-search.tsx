@@ -14,7 +14,7 @@ import { CommandSeparator } from "cmdk";
 import { useNavigate } from "react-router-dom";
 import { useSearchHistory } from "@/hooks/use-search-history";
 import { format } from "date-fns";
-import { UseFavorite } from "@/hooks/use-favorite";
+import { useFavorite } from "@/hooks/use-favorite";
 
 const CitySearch = () => {
   const [open, setOpen] = useState(false);
@@ -41,12 +41,12 @@ const CitySearch = () => {
     navigate(`/city/${name}?lat=${lat}&lon=${lon}`);
   };
 
-  const { favorites } = UseFavorite();
+  const { favorites } = useFavorite();
 
   return (
     <>
       <Button
-        className="relative w-fulll justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64"
+        className="relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64"
         variant="outline"
         onClick={() => setOpen(true)}
       >
@@ -95,7 +95,7 @@ const CitySearch = () => {
               <CommandSeparator />
               <CommandGroup>
                 <div className="flex items-center justify-between px-2 my-2">
-                  <p className="text-xs text-mutated-foreground">
+                  <p className="text-xs text-muted-foreground">
                     Recent Searches
                   </p>
                   <Button
@@ -104,6 +104,7 @@ const CitySearch = () => {
                     onClick={() => clearHistory.mutate()}
                   >
                     <XCircle className="h-4 w-4" />
+                    Clear
                   </Button>
                 </div>
                 {history.map((location) => {
@@ -123,7 +124,7 @@ const CitySearch = () => {
                       <span className="text-sm text-muted-foreground">
                         , {location.country}
                       </span>
-                      <span>
+                      <span className="ml-auto text-xs text-muted-foreground">
                         {format(location.searchedAt, "MMM d, h:mm a")}
                       </span>
                     </CommandItem>
